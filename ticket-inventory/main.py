@@ -2,6 +2,7 @@
     Imports Acquire and Factory -- two components of the inventory which:
     * Acquire: automatically "picks up" and adds item to inventory
     * Factory: creates new items from either default or designated template
+    * items: an object which contains a user's inventory
 """
 from inventory import Acquire, Factory, items
 
