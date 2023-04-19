@@ -15,10 +15,9 @@ def main():
             items = json.load(fh)
         stock = []
         for item in items:
-            print(item)
             item_no = len(stock) + 1
             stock.append(
-                {"choice": f"{item_no} {item} ({items[item]})", "outcome": item_no}
+                {"choice": f"{item_no} {item} ({items[item]})\n", "outcome": item_no}
             )
         selection = narrator.Question({
             "question": "\nChoose a thing:\n",
