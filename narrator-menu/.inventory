@@ -1,17 +1,7 @@
-[
-    {
-        "Soda": 1
-    },
-    {
-        "Beet Juice": 2
-    },
-    {
-        "Super Greens": 3
-    },
-    {
-        "Carrot Juice": 4
-    },
-    {
-        "Apple Juice": 5
-    }
-]
+{
+    "Soda": 1,
+    "Beet Juice": 2,
+    "Super Greens": 3,
+    "Carrot Juice": 4,
+    "Apple Juice": 5
+}

@@ -1,3 +1,4 @@
+import json
 import narrator
 
 def main():
@@ -9,15 +10,19 @@ def main():
     response = use.ask()
 
     if response:
+        # Load the items from an inventory file
+        with open(".inventory", "r") as fh:
+            items = json.load(fh)
+        stock = []
+        for item in items:
+            print(item)
+            item_no = len(stock) + 1
+            stock.append(
+                {"choice": f"{item_no} {item} ({items[item]})", "outcome": item_no}
+            )
         selection = narrator.Question({
             "question": "\nChoose a thing:\n",
-            "responses": [
-                {"choice": "1 Soda ", "outcome": 1},
-                {"choice": "2 Beet Juice ", "outcome": 2},
-                {"choice": "3 Super Greens ", "outcome": 3},
-                {"choice": "4 Carrot Juice ", "outcome": 4},
-                {"choice": "5 Apple Juice", "outcome": 5}
-            ]
+            "responses": stock
         })
         response = selection.ask()
         print(response)
