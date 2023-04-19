@@ -15,7 +15,10 @@ def award(amount: int = 0) -> None:
         Acquire("Ticket.py")
 
 def spend(cost: int = 0) -> bool:
+    """ Spend n user tickets """
+    # Get the tickets in user's inventory
     tickets = items.list["Ticket"]["quantity"]
+    # Evaluate if the tickets can spend
     if tickets < cost:
         return False
     return True
