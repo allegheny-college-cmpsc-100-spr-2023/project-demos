@@ -35,7 +35,10 @@ def main():
         award(5)
     else:
         price = int(input("Cost: "))
-        print(f"Can spend tickets: {spend(price)}")
+        can_spend = spend(price)
+        if can_spend:
+            for _ in range(price):
+                items.use("Ticket")
 
 if __name__ == "__main__":
     # Run program beginning at main method
