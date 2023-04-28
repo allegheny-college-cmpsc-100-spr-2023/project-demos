@@ -12,15 +12,16 @@ class Kart:
         shutil.move(__file__, self.route[direction])
 
     def turn(self, direction: str = "left") -> None:
+        self.__move(direction = direction)
         subprocess.call(
-            f' -c "cd {direction} && exec $SHELL"', 
+            f'sh -c "cd {self.route[direction]} && exec $SHELL"', 
             shell = True
         )
-        self.__move(direction)
 
 def main():
     kart = Kart()
-    kart.turn()
+    turn = input("Direction [left/right]: ")
+    kart.turn(direction = turn)
 
 if __name__ == "__main__":
     main()
