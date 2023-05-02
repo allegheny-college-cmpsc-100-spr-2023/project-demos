@@ -5,9 +5,10 @@ from inventory import Acquire, Factory, items
 
 def main():
     stocks = Market()
-    print(stocks.status("AAA").price)
-    Factory("AAA", template = "templates/Share.py")
-    Acquire("AAA.py")
+    symbol = input("Symbol: ")
+    print(stocks.status(symbol).price)
+    Factory(symbol, template = "templates/Share.py")
+    Acquire(f"{symbol}.py")
 
 if __name__ == "__main__":
     main()
