@@ -89,11 +89,12 @@ class Hand:
             finish = i + 2
 
     def matches(self, cards: list = list()) -> list:
-        """ Return three-of-a-kinds: IS UNTESTED """
+        """ Return three-of-a-kinds """
         start = 0
         finish = 1
         if not cards:
             cards = self.cards
+        # Auto assign to the first non-Joker value
         cards = self.__auto_assign_wilds(cards)
         for i in range(len(cards)):
             while self.__is_value(cards[start : finish]):
