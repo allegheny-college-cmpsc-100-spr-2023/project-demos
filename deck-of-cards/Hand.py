@@ -36,21 +36,24 @@ class Hand:
                 return False
         return True
 
-    def sequences(self) -> list:
+    def sequences(self, cards = list()) -> list:
         """ Determine all sequences matching rules """
         start = 0
         finish = 1
+        # If no list provided as parameter, default to dealt hand
+        if not cards:
+            cards = self.cards
         # Iterate through cards using index values
-        for i in range(len(self.cards)):
+        for i in range(len(cards)):
             # While suits match, keep going
-            while self.__is_suit(self.cards[start : finish]):
+            while self.__is_suit(cards[start : finish]):
                 # If we've reached the end, break
-                if finish > len(self.cards):
+                if finish > len(cards):
                     break
                 # Otherwise, increment to next card
                 finish += 1
             # Here, this is a potential match
-            poss_match = self.cards[start : finish - 1]
+            poss_match = cards[start : finish - 1]
             # If at least min_matches long...
             if len(poss_match) >= self.min_matches:
                 # _And_ if ascending _and_ sequential
@@ -62,16 +65,18 @@ class Hand:
             # Next card after new start
             finish = i + 1
 
-    def matches(self) -> list:
+    def matches(self, cards = list()) -> list:
         """ Return three-of-a-kinds: IS UNTESTED """
         start = 0
         finish = 1
-        for i in range(self.cards):
-            while self.__is_value(self.cards[start : finish]):
-                if finish > len(self.cards):
+        if not cards:
+            cards = self.cards
+        for i in range(cards):
+            while self.__is_value(cards[start : finish]):
+                if finish > len(cards):
                     break
                 finish += 1
-            poss_match = self.cards[start : finish -1]
+            poss_match = cards[start : finish -1]
             if len(poss_match) >= self.min_matches:
                 yield(poss_match)
             start = i
