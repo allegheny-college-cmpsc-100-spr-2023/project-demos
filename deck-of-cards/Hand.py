@@ -70,13 +70,13 @@ class Hand:
         for i in range(len(cards)):
             # While suits match, keep going
             while self.__is_suit(cards[start : finish]):
+                # Increment to next card
+                finish += 1
                 # If we've reached the end, break
                 if finish > len(cards):
                     break
-                # Otherwise, increment to next card
-                finish += 1
             # Here, this is a potential match
-            poss_match = cards[start : finish - 1]
+            poss_match = cards[start : finish]
             # If at least min_matches long...
             if len(poss_match) >= self.min_matches:
                 # _And_ if ascending _and_ sequential
@@ -97,10 +97,10 @@ class Hand:
         cards = self.__auto_assign_wilds(cards)
         for i in range(cards):
             while self.__is_value(cards[start : finish]):
+                finish += 1
                 if finish > len(cards):
                     break
-                finish += 1
-            poss_match = cards[start : finish - 1]
+            poss_match = cards[start : finish]
             if len(poss_match) >= self.min_matches:
                 yield(poss_match)
             start = i + 1
