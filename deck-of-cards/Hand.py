@@ -53,9 +53,9 @@ class Hand:
     def __auto_assign_wilds(self, cards: list) -> list:
         value = [card for card in cards if card.rank != 51]
         for card in cards:
-            if card.rank == 0:
+            if card.rank == 51:
                 idx = cards.index(card)
-                cards[idx] = Card(value.rank, "♠︎♣︎♥︎♦︎")
+                cards[idx] = Card(value[0].rank, "♠︎♣︎♥︎♦︎")
         return self.__auto_sort(cards)
 
     def sequences(self, cards: list = list()) -> list:
@@ -95,7 +95,7 @@ class Hand:
         if not cards:
             cards = self.cards
         cards = self.__auto_assign_wilds(cards)
-        for i in range(cards):
+        for i in range(len(cards)):
             while self.__is_value(cards[start : finish]):
                 finish += 1
                 if finish > len(cards):
