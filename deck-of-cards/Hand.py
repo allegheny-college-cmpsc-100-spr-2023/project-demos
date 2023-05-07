@@ -1,3 +1,5 @@
+from Card import Card
+
 class Hand:
 
     def __init__(self, deck: list = []):
@@ -6,19 +8,19 @@ class Hand:
 
     def __auto_sort(self, cards: list) -> list:
         """ Sort on demand by suit, then rank """
-        sorted(
+        cards = sorted(
             cards,
-            key = lambda card: (card.suit, int(card.rank))
+            key = lambda card: (card.suit, card.rank)
         )
         return cards
 
     def __is_suit(self, cards: list) -> bool:
         """ Return true if all suits match """
-        return all(card.suit == cards[0].suit for card in cards)
+        return all(card.suit in cards[0].suit for card in cards)
 
     def __is_value(self, cards: list) -> bool:
         """ Return if all have the same value """
-        return all(card.rank == cards[0].rank for card in cards)
+        return all(card.rank in [cards[0].rank] for card in cards)
 
     def __is_ascending(self, cards: list) -> bool:
         """ Check if values ascend """
@@ -36,13 +38,26 @@ class Hand:
                 return False
         return True
 
-    def sequences(self, cards = list()) -> list:
+    def __assign_wilds(self, cards: list) -> Card:
+        suits = {"S":"♠︎", "C":"♣︎", "H":"♥︎", "D":"♦︎"}
+        for card in cards:
+            if card.rank == 0:
+                idx = cards.index(card)
+                rank = input("ENTER JOKER RANK [2-A]: ")
+                for suit in suits:
+                    print(f"{suit}. {suits[suit]}")
+                suit = input("ENTER SUIT: ")
+                cards[idx] = Card(rank, suits[suit])
+        return cards
+
+    def sequences(self, cards: list = list()) -> list:
         """ Determine all sequences matching rules """
         start = 0
         finish = 1
         # If no list provided as parameter, default to dealt hand
         if not cards:
             cards = self.cards
+        cards = self.__assign_wilds(cards)
         # Iterate through cards using index values
         for i in range(len(cards)):
             # While suits match, keep going
@@ -61,11 +76,11 @@ class Hand:
                     # Send a match immediately (see main.py for handling)
                     yield poss_match
             # Start where we ended?
-            start = i
+            start = i + 1
             # Next card after new start
-            finish = i + 1
+            finish = i + 2
 
-    def matches(self, cards = list()) -> list:
+    def matches(self, cards: list = list()) -> list:
         """ Return three-of-a-kinds: IS UNTESTED """
         start = 0
         finish = 1
@@ -76,7 +91,7 @@ class Hand:
                 if finish > len(cards):
                     break
                 finish += 1
-            poss_match = cards[start : finish -1]
+            poss_match = cards[start : finish - 1]
             if len(poss_match) >= self.min_matches:
                 yield(poss_match)
             start = i
