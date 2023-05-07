@@ -1,5 +1,6 @@
 class Card:
 
+    # List of conversions for "royal" values
     ROYALS = {
         "A": 14,
         "J": 11,
