@@ -47,7 +47,7 @@ class Hand:
                 for suit in suits:
                     print(f"{suit}. {suits[suit]}")
                 suit = input("ENTER SUIT: ")
-                cards[idx] = Card(rank, suits[suit])
+                cards[idx] = Card(rank.upper(), suits[suit].upper())
         return self.__auto_sort(cards)
 
     def __auto_assign_wilds(self, cards: list) -> list:
