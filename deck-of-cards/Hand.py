@@ -38,7 +38,7 @@ class Hand:
                 return False
         return True
 
-    def __assign_wilds(self, cards: list) -> Card:
+    def __assign_wilds(self, cards: list) -> list:
         suits = {"S":"♠︎", "C":"♣︎", "H":"♥︎", "D":"♦︎"}
         for card in cards:
             if card.rank == 0:
@@ -49,6 +49,14 @@ class Hand:
                 suit = input("ENTER SUIT: ")
                 cards[idx] = Card(rank, suits[suit])
         return self.__auto_sort(cards)
+
+    def __auto_assign_wilds(self, cards: list) -> list:
+        value = [card for card in cards if card.rank != 0]
+        for card in cards:
+            if card.rank == 0:
+                idx = cards.index(card)
+                cards[idx] = Card(value.rank, "♠︎♣︎♥︎♦︎")
+        rreturn self.__auto_sort(cards)
 
     def sequences(self, cards: list = list()) -> list:
         """ Determine all sequences matching rules """
@@ -86,6 +94,7 @@ class Hand:
         finish = 1
         if not cards:
             cards = self.cards
+        cards = self.__auto_assign_wilds(cards)
         for i in range(cards):
             while self.__is_value(cards[start : finish]):
                 if finish > len(cards):
