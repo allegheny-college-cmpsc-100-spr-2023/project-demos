@@ -48,7 +48,7 @@ class Hand:
                     print(f"{suit}. {suits[suit]}")
                 suit = input("ENTER SUIT: ")
                 cards[idx] = Card(rank, suits[suit])
-        return cards
+        return self.__auto_sort(cards)
 
     def sequences(self, cards: list = list()) -> list:
         """ Determine all sequences matching rules """
