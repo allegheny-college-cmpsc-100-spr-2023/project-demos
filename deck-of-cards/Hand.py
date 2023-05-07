@@ -105,4 +105,3 @@ class Hand:
                 yield(poss_match)
             start = i + 1
             finish = i + 2
-        matches = []
