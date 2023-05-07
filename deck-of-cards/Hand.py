@@ -56,7 +56,7 @@ class Hand:
             if card.rank == 0:
                 idx = cards.index(card)
                 cards[idx] = Card(value.rank, "♠︎♣︎♥︎♦︎")
-        rreturn self.__auto_sort(cards)
+        return self.__auto_sort(cards)
 
     def sequences(self, cards: list = list()) -> list:
         """ Determine all sequences matching rules """
