@@ -1,4 +1,5 @@
 from Card import Card
+from typing import Generator
 
 class Hand:
 
@@ -47,7 +48,7 @@ class Hand:
                 for suit in suits:
                     print(f"{suit}. {suits[suit]}")
                 suit = input("ENTER SUIT: ")
-                cards[idx] = Card(rank.upper(), suits[suit].upper())
+                cards[idx] = Card(rank.upper(), suits[suit.upper()])
         return self.__auto_sort(cards)
 
     def __auto_assign_wilds(self, cards: list) -> list:
@@ -58,7 +59,7 @@ class Hand:
                 cards[idx] = Card(value[0].rank, "♠︎♣︎♥︎♦︎")
         return self.__auto_sort(cards)
 
-    def sequences(self, cards: list = list()) -> list:
+    def sequences(self, cards: list = list()) -> Generator[list, list, None]:
         """ Determine all sequences matching rules """
         start = 0
         finish = 1
@@ -88,7 +89,7 @@ class Hand:
             # Next card after new start
             finish = i + 2
 
-    def matches(self, cards: list = list()) -> list:
+    def matches(self, cards: list = list()) -> Generator[list, list, None]:
         """ Return three-of-a-kinds """
         start = 0
         finish = 1
