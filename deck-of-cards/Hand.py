@@ -41,7 +41,7 @@ class Hand:
     def __assign_wilds(self, cards: list) -> list:
         suits = {"S":"♠︎", "C":"♣︎", "H":"♥︎", "D":"♦︎"}
         for card in cards:
-            if card.rank == 0:
+            if card.rank == 51:
                 idx = cards.index(card)
                 rank = input("ENTER JOKER RANK [2-A]: ")
                 for suit in suits:
@@ -51,7 +51,7 @@ class Hand:
         return self.__auto_sort(cards)
 
     def __auto_assign_wilds(self, cards: list) -> list:
-        value = [card for card in cards if card.rank != 0]
+        value = [card for card in cards if card.rank != 51]
         for card in cards:
             if card.rank == 0:
                 idx = cards.index(card)
