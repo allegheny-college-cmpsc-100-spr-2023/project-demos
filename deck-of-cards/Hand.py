@@ -94,6 +94,6 @@ class Hand:
             poss_match = cards[start : finish - 1]
             if len(poss_match) >= self.min_matches:
                 yield(poss_match)
-            start = i
-            finish = i + 1
+            start = i + 1
+            finish = i + 2
         matches = []
